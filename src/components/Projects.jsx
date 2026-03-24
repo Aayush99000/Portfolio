@@ -5,6 +5,7 @@ const projects = [
   {
     title: 'Text-to-Sign Motion Generation',
     desc: 'Pipeline mapping natural language to realistic sign language motion sequences (T × 668 skeletal features) using a 55-joint BVH skeleton at 30 FPS across ~12k training samples.',
+    metrics: ['~12k samples', '30 FPS', '668 features/frame'],
     tags: ['NLP', 'Motion Synthesis', 'SMPL-X', 'Diffusion', 'PyTorch'],
     github: 'https://github.com/Aayush99000',
     color: '#00d4ff',
@@ -13,6 +14,7 @@ const projects = [
   {
     title: 'RAG Fitness Assistant',
     desc: 'AI-powered fitness chatbot using Retrieval Augmented Generation backed by 500+ exercises. Stack: LangChain, ChromaDB, Groq-hosted Llama 3 8B, sentence-transformers, Streamlit.',
+    metrics: ['500+ exercises', 'Llama 3 8B', 'RAG pipeline'],
     tags: ['RAG', 'LangChain', 'LLM', 'ChromaDB', 'Streamlit'],
     github: 'https://github.com/Aayush99000',
     color: '#7c3aed',
@@ -21,6 +23,7 @@ const projects = [
   {
     title: 'Low-Resource Medical Imaging',
     desc: 'Empirical study comparing three transfer learning strategies under extreme data scarcity (~300 samples). Achieved 92.02% accuracy & 0.9875 AUC with ImageNet-pretrained DenseNet121.',
+    metrics: ['92.02% accuracy', '0.9875 AUC', '+14% vs baseline'],
     tags: ['Transfer Learning', 'Medical AI', 'DenseNet', 'MedSigLIP', 'k-Fold CV'],
     github: 'https://github.com/Aayush99000',
     color: '#ec4899',
@@ -29,6 +32,7 @@ const projects = [
   {
     title: 'Cloud Detection on Satellite Data',
     desc: 'UNet and Attention-UNet architectures for cloud segmentation on LANDSAT imagery. Achieved 98% accuracy and 93% Dice score via Transfer Learning at ISRO.',
+    metrics: ['98% accuracy', '93% Dice score', '1k+ images'],
     tags: ['UNet', 'Segmentation', 'LANDSAT', 'TensorFlow', 'GIS'],
     github: null,
     color: '#10b981',
@@ -36,6 +40,7 @@ const projects = [
   {
     title: 'Image Captioning on Satellite Data',
     desc: 'Encoder-decoder models (ResNet-50, VGG-19, DenseNet-201, EfficientNet-B7 + LSTM) for satellite image captioning. EfficientNet-B7 + LSTM achieved BLEU-4 of 0.6916.',
+    metrics: ['94.05% accuracy', 'BLEU-4: 0.6916', 'RSICD dataset'],
     tags: ['Image Captioning', 'LSTM', 'EfficientNet', 'RSICD', 'Encoder-Decoder'],
     github: null,
     color: '#f59e0b',
@@ -85,6 +90,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.15 }}
+              className="glass-card"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
@@ -92,8 +98,6 @@ export default function Projects() {
                 borderRadius: 16,
                 overflow: 'hidden',
                 border: `1px solid ${p.color}25`,
-                background: 'var(--card)',
-                backdropFilter: 'blur(10px)',
                 transition: 'border-color 0.3s, box-shadow 0.3s',
                 direction: i % 2 === 1 ? 'rtl' : 'ltr',
               }}
@@ -159,9 +163,25 @@ export default function Projects() {
                 }}>
                   Featured Project
                 </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: 16, color: '#e2e8f0' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: 14, color: '#e2e8f0' }}>
                   {p.title}
                 </h3>
+                {/* Metrics callouts */}
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+                  {p.metrics.map(m => (
+                    <span key={m} style={{
+                      padding: '3px 11px',
+                      borderRadius: 6,
+                      fontSize: '0.72rem',
+                      fontFamily: 'JetBrains Mono',
+                      fontWeight: 600,
+                      background: `${p.color}18`,
+                      border: `1px solid ${p.color}50`,
+                      color: p.color,
+                      letterSpacing: '0.02em',
+                    }}>{m}</span>
+                  ))}
+                </div>
                 <p style={{ color: 'var(--muted)', lineHeight: 1.75, fontSize: '0.9rem', marginBottom: 24 }}>
                   {p.desc}
                 </p>
@@ -202,15 +222,14 @@ export default function Projects() {
           {rest.map((p, i) => (
             <motion.div
               key={p.title}
+              className="glass-card"
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.65 + i * 0.12 }}
               style={{
                 padding: '28px 28px',
                 borderRadius: 14,
-                background: 'var(--card)',
                 border: `1px solid ${p.color}20`,
-                backdropFilter: 'blur(10px)',
                 display: 'flex', flexDirection: 'column', gap: 12,
                 transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
               }}
@@ -252,6 +271,21 @@ export default function Projects() {
                     ><GitHubIcon /></a>
                   )}
                 </div>
+              </div>
+              {/* Metrics callouts */}
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {p.metrics.map(m => (
+                  <span key={m} style={{
+                    padding: '2px 9px',
+                    borderRadius: 5,
+                    fontSize: '0.68rem',
+                    fontFamily: 'JetBrains Mono',
+                    fontWeight: 600,
+                    background: `${p.color}15`,
+                    border: `1px solid ${p.color}45`,
+                    color: p.color,
+                  }}>{m}</span>
+                ))}
               </div>
               <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.65 }}>{p.desc}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto', paddingTop: 8 }}>

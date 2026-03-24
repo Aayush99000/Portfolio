@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const categories = [
@@ -27,6 +27,8 @@ const categories = [
 export default function Skills() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  // { ci: categoryIndex, si: skillIndex } or null
+  const [hovered, setHovered] = useState(null)
 
   return (
     <section id="skills" ref={ref}>
@@ -44,15 +46,14 @@ export default function Skills() {
           {categories.map((cat, ci) => (
             <motion.div
               key={cat.title}
+              className="glass-card"
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: ci * 0.12 }}
               style={{
                 padding: '28px 24px',
                 borderRadius: 14,
-                background: 'var(--card)',
                 border: `1px solid ${cat.color}22`,
-                backdropFilter: 'blur(10px)',
                 transition: 'border-color 0.3s, box-shadow 0.3s',
               }}
               onMouseEnter={e => {
@@ -61,7 +62,7 @@ export default function Skills() {
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.borderColor = `${cat.color}22`
-                e.currentTarget.style.boxShadow = 'none'
+                e.currentTarget.style.boxShadow = ''
               }}
             >
               <h3 style={{
@@ -75,28 +76,58 @@ export default function Skills() {
                 {cat.title}
               </h3>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {cat.skills.map((skill, si) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.7 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.35, delay: ci * 0.1 + si * 0.04 }}
-                    style={{
-                      padding: '5px 13px',
-                      borderRadius: 20,
-                      fontSize: '0.78rem',
-                      fontWeight: 500,
-                      background: `${cat.color}12`,
-                      border: `1px solid ${cat.color}30`,
-                      color: cat.color,
-                      cursor: 'default',
-                      transition: 'background 0.2s, transform 0.15s',
-                    }}
-                    whileHover={{ scale: 1.08, y: -2 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+                {cat.skills.map((skill, si) => {
+                  const dist = hovered && hovered.ci === ci ? Math.abs(hovered.si - si) : null
+                  const isActive = dist === 0
+                  const isNear   = dist === 1
+                  const isMid    = dist === 2
+
+                  return (
+                    <motion.span
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.7 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.35, delay: ci * 0.1 + si * 0.04 }}
+                      onMouseEnter={() => setHovered({ ci, si })}
+                      onMouseLeave={() => setHovered(null)}
+                      style={{
+                        padding: '5px 13px',
+                        borderRadius: 20,
+                        fontSize: '0.78rem',
+                        fontWeight: 500,
+                        cursor: 'default',
+                        transition: 'all 0.22s ease',
+                        background: isActive
+                          ? `${cat.color}35`
+                          : isNear
+                          ? `${cat.color}22`
+                          : isMid
+                          ? `${cat.color}16`
+                          : `${cat.color}12`,
+                        border: isActive
+                          ? `1px solid ${cat.color}80`
+                          : `1px solid ${cat.color}30`,
+                        color: cat.color,
+                        transform: isActive
+                          ? 'scale(1.12) translateY(-3px)'
+                          : isNear
+                          ? 'scale(1.05) translateY(-2px)'
+                          : isMid
+                          ? 'scale(1.02) translateY(-1px)'
+                          : 'scale(1)',
+                        boxShadow: isActive
+                          ? `0 0 14px ${cat.color}50`
+                          : isNear
+                          ? `0 0 6px ${cat.color}25`
+                          : 'none',
+                        zIndex: isActive ? 2 : 1,
+                        position: 'relative',
+                      }}
+                    >
+                      {skill}
+                    </motion.span>
+                  )
+                })}
               </div>
             </motion.div>
           ))}

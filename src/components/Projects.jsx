@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 const projects = [
   {
     title: "Text-to-Sign Motion Generation",
-    image: null, // set to '/images/sign-language.png' when ready
+    image: "/images/Sign-to-text.png",
     desc: "Pipeline mapping natural language to realistic sign language motion sequences (T × 668 skeletal features) using a 55-joint BVH skeleton at 30 FPS across ~12k training samples.",
     metrics: ["~12k samples", "30 FPS", "668 features/frame"],
     tags: ["NLP", "Motion Synthesis", "SMPL-X", "Diffusion", "PyTorch"],
@@ -18,7 +18,7 @@ const projects = [
     metrics: ["500+ exercises", "Llama 3 8B", "RAG pipeline"],
     tags: ["RAG", "LangChain", "LLM", "ChromaDB", "Streamlit"],
     github: "https://github.com/Aayush99000",
-    image: null, // set to '/images/rag-fitness.png' when ready
+    image: "/images/RAG-fitness.png",
     color: "#7c3aed",
     featured: true,
   },
@@ -34,7 +34,7 @@ const projects = [
       "k-Fold CV",
     ],
     github: "https://github.com/Aayush99000",
-    image: null, // set to '/images/medical-imaging.png' when ready
+    image: "/images/medical-imaging.png",
     color: "#ec4899",
     featured: true,
   },
@@ -44,7 +44,7 @@ const projects = [
     metrics: ["98% accuracy", "93% Dice score", "1k+ images"],
     tags: ["UNet", "Segmentation", "LANDSAT", "TensorFlow", "GIS"],
     github: null,
-    image: null, // set to '/images/cloud-detection.png' when ready
+    image: "/images/cloud-detection.png",
     color: "#10b981",
   },
   {
@@ -59,7 +59,7 @@ const projects = [
       "Encoder-Decoder",
     ],
     github: null,
-    image: null, // set to '/images/image-captioning.png' when ready
+    image: "/images/image-captioning.png",
     color: "#f59e0b",
   },
 ];
@@ -164,7 +164,11 @@ export default function Projects() {
                   <img
                     src={p.image}
                     alt={p.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                   />
                 ) : (
                   <>
@@ -175,19 +179,37 @@ export default function Projects() {
                         backgroundImage: `repeating-linear-gradient(${p.color}08 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, ${p.color}08 0 1px, transparent 1px 40px)`,
                       }}
                     />
-                    <div style={{ position: "relative", textAlign: "center", padding: 24 }}>
+                    <div
+                      style={{
+                        position: "relative",
+                        textAlign: "center",
+                        padding: 24,
+                      }}
+                    >
                       <div
                         style={{
-                          width: 64, height: 64, borderRadius: 16,
+                          width: 64,
+                          height: 64,
+                          borderRadius: 16,
                           background: `${p.color}15`,
                           border: `1px solid ${p.color}40`,
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                          margin: "0 auto 12px", fontSize: "1.8rem",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          margin: "0 auto 12px",
+                          fontSize: "1.8rem",
                         }}
                       >
                         {i === 0 ? "🤟" : i === 1 ? "🏋️" : "🩺"}
                       </div>
-                      <span style={{ fontFamily: "JetBrains Mono", fontSize: "0.7rem", color: `${p.color}80`, letterSpacing: "0.1em" }}>
+                      <span
+                        style={{
+                          fontFamily: "JetBrains Mono",
+                          fontSize: "0.7rem",
+                          color: `${p.color}80`,
+                          letterSpacing: "0.1em",
+                        }}
+                      >
                         IMAGE COMING SOON
                       </span>
                     </div>
@@ -378,17 +400,30 @@ export default function Projects() {
                   <img
                     src={p.image}
                     alt={p.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                   />
                 ) : (
                   <>
                     <div
                       style={{
-                        position: "absolute", inset: 0,
+                        position: "absolute",
+                        inset: 0,
                         backgroundImage: `repeating-linear-gradient(${p.color}06 0 1px, transparent 1px 30px), repeating-linear-gradient(90deg, ${p.color}06 0 1px, transparent 1px 30px)`,
                       }}
                     />
-                    <span style={{ fontFamily: "JetBrains Mono", fontSize: "0.65rem", color: `${p.color}60`, letterSpacing: "0.1em", position: "relative" }}>
+                    <span
+                      style={{
+                        fontFamily: "JetBrains Mono",
+                        fontSize: "0.65rem",
+                        color: `${p.color}60`,
+                        letterSpacing: "0.1em",
+                        position: "relative",
+                      }}
+                    >
                       IMAGE COMING SOON
                     </span>
                   </>

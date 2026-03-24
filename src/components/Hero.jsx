@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import FloatingLogos from './FloatingLogos'
-import LossChart from './LossChart'
-import GradientDescent from './GradientDescent'
 
 const ROLES = [
   'ML Engineer',
@@ -52,7 +50,6 @@ export default function Hero() {
     <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
       <FloatingLogos />
       <div className="container">
-        <div className="hero-grid">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.p variants={item} style={{
             fontFamily: "'JetBrains Mono', monospace",
@@ -190,23 +187,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right panel — DL visualizations */}
-        <div className="hero-viz-panel">
-          <div className="glass-card" style={{
-            padding: '20px 22px', borderRadius: 12,
-            border: '1px solid rgba(0,212,255,0.12)',
-          }}>
-            <LossChart />
-          </div>
-          <div className="glass-card" style={{
-            padding: '20px 22px', borderRadius: 12,
-            border: '1px solid rgba(124,58,237,0.12)',
-          }}>
-            <GradientDescent width={340} height={200} />
-          </div>
-        </div>
-
-        </div>{/* end hero-grid */}
       </div>
 
       {/* scroll hint */}

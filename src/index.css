@@ -165,7 +165,26 @@ section {
   background-clip: text;
 }
 
+/* Hero two-column layout */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-viz-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 /* Responsive */
+@media (max-width: 1100px) {
+  .hero-viz-panel { display: none; }
+  .hero-grid { grid-template-columns: 1fr !important; }
+}
+
 @media (max-width: 768px) {
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import SkillsRadar from './SkillsRadar'
+import SkillConstellation from './SkillConstellation'
 
 const categories = [
   {
@@ -43,7 +43,7 @@ export default function Skills() {
           <span className="number">02.</span> Skills <div className="line" />
         </motion.h2>
 
-        <SkillsRadar />
+        <SkillConstellation />
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24, marginTop: 32 }}>
           {categories.map((cat, ci) => (

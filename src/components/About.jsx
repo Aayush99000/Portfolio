@@ -1,12 +1,36 @@
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const stats = [
   { value: '2+', label: 'Research Internships' },
   { value: '5+', label: 'AI Projects' },
-  { value: '2', label: 'Publications' },
+  { value: '2',  label: 'Publications' },
   { value: '98%', label: 'Peak Model Accuracy' },
 ]
+
+function CountUp({ target, inView }) {
+  const [displayed, setDisplayed] = useState('0')
+
+  useEffect(() => {
+    if (!inView) return
+    const match = target.match(/^([\d.]+)(.*)$/)
+    if (!match) { setDisplayed(target); return }
+    const num = parseFloat(match[1])
+    const suffix = match[2]
+    const duration = 1800
+    const start = performance.now()
+
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplayed(Math.round(num * eased) + suffix)
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [inView, target])
+
+  return displayed
+}
 
 export default function About() {
   const ref = useRef(null)
@@ -64,29 +88,28 @@ export default function About() {
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
+                className="glass-card"
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                 style={{
                   padding: '28px 20px',
                   borderRadius: 12,
-                  background: 'var(--card)',
-                  border: '1px solid var(--border)',
+                  border: '1px solid rgba(0,212,255,0.12)',
                   textAlign: 'center',
-                  backdropFilter: 'blur(10px)',
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = 'rgba(0,212,255,0.5)'
+                  e.currentTarget.style.borderColor = 'rgba(0,212,255,0.45)'
                   e.currentTarget.style.boxShadow = '0 0 24px rgba(0,212,255,0.12)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'var(--border)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.borderColor = 'rgba(0,212,255,0.12)'
+                  e.currentTarget.style.boxShadow = ''
                 }}
               >
                 <div style={{ fontSize: '2rem', fontWeight: 800, color: '#00d4ff', letterSpacing: '-0.02em' }}>
-                  {s.value}
+                  <CountUp target={s.value} inView={inView} />
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6, lineHeight: 1.4 }}>
                   {s.label}

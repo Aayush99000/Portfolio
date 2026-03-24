@@ -45,12 +45,11 @@ export default function Publications() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, delay: i * 0.18 }}
+              className="glass-card"
               style={{
                 padding: '32px 36px',
                 borderRadius: 14,
-                background: 'var(--card)',
                 border: `1px solid ${p.color}20`,
-                backdropFilter: 'blur(10px)',
                 display: 'flex',
                 gap: 28,
                 alignItems: 'flex-start',

@@ -89,11 +89,10 @@ export default function Experience() {
                 <div style={{
                   padding: '28px 32px',
                   borderRadius: 14,
-                  background: 'var(--card)',
                   border: `1px solid ${exp.color}20`,
-                  backdropFilter: 'blur(10px)',
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}
+                className="glass-card"
                   onMouseEnter={e => {
                     e.currentTarget.style.borderColor = `${exp.color}50`
                     e.currentTarget.style.boxShadow = `0 0 30px ${exp.color}10`

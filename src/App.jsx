@@ -14,6 +14,7 @@ export default function App() {
   return (
     <>
       <NeuralBackground />
+      <div className="scanline" />
       <Cursor />
       <ScrollBot />
       <Navbar />

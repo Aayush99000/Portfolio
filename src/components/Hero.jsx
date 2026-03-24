@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import FloatingLogos from './FloatingLogos'
 
 const ROLES = [
   'ML Engineer',
@@ -47,6 +48,7 @@ export default function Hero() {
 
   return (
     <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
+      <FloatingLogos />
       <div className="container">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.p variants={item} style={{
@@ -63,11 +65,29 @@ export default function Hero() {
             fontSize: 'clamp(2.4rem, 8vw, 5.5rem)',
             fontWeight: 800,
             lineHeight: 1.05,
-            marginBottom: 8,
+            marginBottom: 16,
             letterSpacing: '-0.02em',
           }}>
             Aayush Katoch.
           </motion.h1>
+
+          <motion.div variants={item} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+            <span style={{
+              width: 9, height: 9, borderRadius: '50%',
+              background: '#10b981',
+              display: 'inline-block',
+              flexShrink: 0,
+              animation: 'pulse-green 2s ease-in-out infinite',
+            }}/>
+            <span style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: '0.78rem',
+              color: '#10b981',
+              letterSpacing: '0.06em',
+            }}>
+              Open to opportunities
+            </span>
+          </motion.div>
 
           <motion.h2 variants={item} style={{
             fontSize: 'clamp(1.4rem, 4vw, 3rem)',

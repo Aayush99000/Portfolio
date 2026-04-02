@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import FloatingLogos from "./FloatingLogos";
+import HeroNeuralNet from "./HeroNeuralNet";
 
 const ROLES = [
   "ML Models",
@@ -56,6 +57,7 @@ export default function Hero() {
         position: "relative",
       }}
     >
+      <HeroNeuralNet />
       <FloatingLogos />
       <div className="container">
         <motion.div variants={container} initial="hidden" animate="show">

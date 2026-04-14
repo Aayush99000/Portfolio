@@ -82,6 +82,7 @@ export default function Hero() {
               lineHeight: 1.05,
               marginBottom: 16,
               letterSpacing: "-0.02em",
+              color: "#38bdf8",
             }}
           >
             Aayush Katoch.
